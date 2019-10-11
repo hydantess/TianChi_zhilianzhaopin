@@ -1,0 +1,784 @@
+<Section
+    data-component-id="Section1"
+    style={{
+        background: "#F7F6F6",
+        paddingTop: "20px",
+        paddingLeft: "20px",
+        paddingRight: "20px",
+        paddingBottom: "20px"
+    }}
+>
+    <Section
+        data-component-id="Section2"
+        style={{
+            height: "200px",
+            textAlign: "center",
+            background:
+                "no-repeat url(https://img.alicdn.com/tfs/TB13uB3EFzqK1RjSZFCXXbbxVXa-1400-200.png) center bottom",
+            backgroundSize: "cover",
+            paddingTop: "90px",
+            display: "block",
+            textDecoration: "none",
+            fontStyle: "normal",
+            lineHeight: "normal",
+            fontSize: "medium"
+        }}
+    />
+    <Section data-component-id="Section2" style={{ backgroundColor: "#fff" }}>
+        <BigForm
+            layout="inline"
+            formItems={[
+                {
+                    name: "city",
+                    label: "工作城市：",
+                    type: "input",
+                    required: false,
+                    errMessage: "请输入名称",
+                    defaultValue: "801",
+                    placeholder: "请输入工作城市",
+                    dataSource: []
+                },
+                {
+                    type: "input",
+                    required: false,
+                    name: "jd_sub_type",
+                    label: "职位类型：",
+                    placeholder: "请输入职位类型",
+                    defaultValue: "市场运营"
+                },
+                {
+                    type: "select",
+                    required: false,
+                    name: "min_edu_level2",
+                    label: "学历要求：",
+                    placeholder: "请选择学历",
+                    dataSource: [
+                        { label: "全选", value: -1 },
+                        { label: "高中/中专/中技及以下", value: 1 },
+                        { label: "大专", value: 2 },
+                        { label: "本科", value: 3 },
+                        { label: "硕士/博士", value: 4 }
+                    ],
+                    defaultValue: -1
+                }
+            ]}
+            searchText="查询"
+            onSearch={searchParams => {
+                $setState({ searchParams })
+            }}
+            data-component-id="BigForm1"
+            style={{
+                padding: "10px",
+                marginBottom: "20px",
+                paddingTop: "10px",
+                paddingRight: "10px",
+                paddingBottom: "10px",
+                paddingLeft: "10px"
+            }}
+        />
+        <DataTableWithPage
+            requestUrl="/api/1.0/dsproxy?dsApiPath=/zhaopin_round2_jd_detail3&dsApiMethod=GET&dSaPiId=359039497529474&dsHost=http://c910bcd77a554ebdaeec0895fd0123cc-cn-shanghai.alicloudapi.com&d2projectId=102103"
+            requestInterval="0"
+            requestMethod="get"
+            requestParams={state.searchParams}
+            dataFilter={data => data}
+            columns={[
+                { title: "职位类型", dataIndex: "jd_sub_type" },
+                { title: "标题", dataIndex: "jd_title" },
+                { title: "薪水", dataIndex: "salary" },
+                { title: "城市", dataIndex: "city" },
+                {
+                    title: "工作经验",
+                    dataIndex: "min_years"
+                },
+                { title: "学历要求", dataIndex: "min_edu_level" },
+                {
+                    title: "招聘人数",
+                    dataIndex: "require_nums"
+                },
+                {
+                    title: "发布日期",
+                    dataIndex: "start_date"
+                },
+                { title: "截止日期", dataIndex: "end_date" },
+                {
+                    title: "更多",
+                    dataIndex: "jd_no",
+                    render: (jd_no, item, index) => {
+                        return (
+                            <div>
+                                <Button
+                                    title="查看详情"
+                                    type="primary"
+                                    onClick={() =>
+                                        window.open(
+                                            `#/jd_detail/${item.jd_no}`
+                                        )}
+                                />
+                            </div>
+                        )
+                    }
+                }
+            ]}
+            size="small"
+            bordered={false}
+            showHeader={true}
+            pageSize="10"
+            data-component-id="DataTableWithPage1"
+        />
+    </Section>
+    <Step current={1} shape="arrow" data-component-id="注册账号">
+        <Step.Item title="注册账号" content="content" />
+        <Step.Item title="投递简历" content="content" />
+        <Step.Item title="升职加薪" content="content" />
+    </Step>
+    <Section
+        data-component-id="Section3"
+        style={{
+            marginTop: "20px",
+            backgroundColor: "#fff",
+            marginBottom: "20px",
+            padding: "20px"
+        }}
+    >
+        <Tab
+            size="medium"
+            shape="pure"
+            animation={false}
+            excessMode="slide"
+            tabPosition="top"
+            triggerType="click"
+            lazyLoad={true}
+            unmountInactiveTabs={false}
+            onClick={() => {}}
+            onChange={() => {}}
+            onClose={() => {}}
+            data-component-id="Tab1"
+        >
+            <Tab.Item title="互联网IT">
+                <DataTableWithPage
+                    requestUrl="/api/1.0/dsproxy?dsApiPath=/zhaopin_round2_industry_hot&dsApiMethod=GET&dSaPiId=358915217634018&dsHost=http://c910bcd77a554ebdaeec0895fd0123cc-cn-shanghai.alicloudapi.com&d2projectId=102103"
+                    requestInterval="0"
+                    requestMethod="get"
+                    requestParams={{
+                        pageNum: "1",
+                        pageSize: "10",
+                        cur_industry_id: "互联网IT"
+                    }}
+                    dataFilter={data => data}
+                    columns={[
+                        { title: "职位类型", dataIndex: "jd_sub_type" },
+                        { title: "标题", dataIndex: "jd_title" },
+                        { title: "薪水", dataIndex: "salary" },
+                        { title: "城市", dataIndex: "city" },
+                        {
+                            title: "工作经验",
+                            dataIndex: "min_years"
+                        },
+                        { title: "学历要求", dataIndex: "min_edu_level" },
+                        {
+                            title: "招聘人数",
+                            dataIndex: "require_nums"
+                        },
+                        {
+                            title: "发布日期",
+                            dataIndex: "start_date"
+                        },
+                        { title: "截止日期", dataIndex: "end_date" },
+                        {
+                            title: "更多",
+                            dataIndex: "jd_no",
+                            render: (jd_no, item, index) => {
+                                return (
+                                    <div>
+                                        <Button
+                                            title="查看详情"
+                                            type="primary"
+                                            onClick={() =>
+                                                window.open(
+                                                    `#/jd_detail/${item.jd_no}`
+                                                )}
+                                        />
+                                    </div>
+                                )
+                            }
+                        }
+                    ]}
+                    size="small"
+                    bordered={false}
+                    showHeader={true}
+                    pageSize="10"
+                    data-component-id="DataTableWithPage2"
+                />
+            </Tab.Item>
+            <Tab.Item title="金融">
+                <DataTableWithPage
+                    requestUrl="/api/1.0/dsproxy?dsApiPath=/zhaopin_round2_industry_hot&dsApiMethod=GET&dSaPiId=358915217634018&dsHost=http://c910bcd77a554ebdaeec0895fd0123cc-cn-shanghai.alicloudapi.com&d2projectId=102103"
+                    requestInterval="0"
+                    requestMethod="get"
+                    requestParams={{
+                        pageNum: "1",
+                        pageSize: "10",
+                        cur_industry_id: "金融"
+                    }}
+                    dataFilter={data => data}
+                    columns={[
+                        { title: "职位类型", dataIndex: "jd_sub_type" },
+                        { title: "标题", dataIndex: "jd_title" },
+                        { title: "薪水", dataIndex: "salary" },
+                        { title: "城市", dataIndex: "city" },
+                        {
+                            title: "工作经验",
+                            dataIndex: "min_years"
+                        },
+                        { title: "学历要求", dataIndex: "min_edu_level" },
+                        {
+                            title: "招聘人数",
+                            dataIndex: "require_nums"
+                        },
+                        {
+                            title: "发布日期",
+                            dataIndex: "start_date"
+                        },
+                        { title: "截止日期", dataIndex: "end_date" },
+                        {
+                            title: "更多",
+                            dataIndex: "jd_no",
+                            render: (jd_no, item, index) => {
+                                return (
+                                    <div>
+                                        <Button
+                                            title="查看详情"
+                                            type="primary"
+                                            onClick={() =>
+                                                window.open(
+                                                    `#/jd_detail/${item.jd_no}`
+                                                )}
+                                        />
+                                    </div>
+                                )
+                            }
+                        }
+                    ]}
+                    size="small"
+                    bordered={false}
+                    showHeader={true}
+                    pageSize="10"
+                    data-component-id="DataTableWithPage2"
+                />
+            </Tab.Item>
+            <Tab.Item title="房地产/建筑">
+                <DataTableWithPage
+                    requestUrl="/api/1.0/dsproxy?dsApiPath=/zhaopin_round2_industry_hot&dsApiMethod=GET&dSaPiId=358915217634018&dsHost=http://c910bcd77a554ebdaeec0895fd0123cc-cn-shanghai.alicloudapi.com&d2projectId=102103"
+                    requestInterval="0"
+                    requestMethod="get"
+                    requestParams={{
+                        pageNum: "1",
+                        pageSize: "10",
+                        cur_industry_id: "房地产/建筑"
+                    }}
+                    dataFilter={data => data}
+                    columns={[
+                        { title: "职位类型", dataIndex: "jd_sub_type" },
+                        { title: "标题", dataIndex: "jd_title" },
+                        { title: "薪水", dataIndex: "salary" },
+                        { title: "城市", dataIndex: "city" },
+                        {
+                            title: "工作经验",
+                            dataIndex: "min_years"
+                        },
+                        { title: "学历要求", dataIndex: "min_edu_level" },
+                        {
+                            title: "招聘人数",
+                            dataIndex: "require_nums"
+                        },
+                        {
+                            title: "发布日期",
+                            dataIndex: "start_date"
+                        },
+                        { title: "截止日期", dataIndex: "end_date" },
+                        {
+                            title: "更多",
+                            dataIndex: "jd_no",
+                            render: (jd_no, item, index) => {
+                                return (
+                                    <div>
+                                        <Button
+                                            title="查看详情"
+                                            type="primary"
+                                            onClick={() =>
+                                                window.open(
+                                                    `#/jd_detail/${item.jd_no}`
+                                                )}
+                                        />
+                                    </div>
+                                )
+                            }
+                        }
+                    ]}
+                    size="small"
+                    bordered={false}
+                    showHeader={true}
+                    pageSize="10"
+                    data-component-id="DataTableWithPage2"
+                />
+            </Tab.Item>
+            <Tab.Item title="贸易/零售/物流">
+                <DataTableWithPage
+                    requestUrl="/api/1.0/dsproxy?dsApiPath=/zhaopin_round2_industry_hot&dsApiMethod=GET&dSaPiId=358915217634018&dsHost=http://c910bcd77a554ebdaeec0895fd0123cc-cn-shanghai.alicloudapi.com&d2projectId=102103"
+                    requestInterval="0"
+                    requestMethod="get"
+                    requestParams={{
+                        pageNum: "1",
+                        pageSize: "10",
+                        cur_industry_id: "贸易/零售/物流"
+                    }}
+                    dataFilter={data => data}
+                    columns={[
+                        { title: "职位类型", dataIndex: "jd_sub_type" },
+                        { title: "标题", dataIndex: "jd_title" },
+                        { title: "薪水", dataIndex: "salary" },
+                        { title: "城市", dataIndex: "city" },
+                        {
+                            title: "工作经验",
+                            dataIndex: "min_years"
+                        },
+                        { title: "学历要求", dataIndex: "min_edu_level" },
+                        {
+                            title: "招聘人数",
+                            dataIndex: "require_nums"
+                        },
+                        {
+                            title: "发布日期",
+                            dataIndex: "start_date"
+                        },
+                        { title: "截止日期", dataIndex: "end_date" },
+                        {
+                            title: "更多",
+                            dataIndex: "jd_no",
+                            render: (jd_no, item, index) => {
+                                return (
+                                    <div>
+                                        <Button
+                                            title="查看详情"
+                                            type="primary"
+                                            onClick={() =>
+                                                window.open(
+                                                    `#/jd_detail/${item.jd_no}`
+                                                )}
+                                        />
+                                    </div>
+                                )
+                            }
+                        }
+                    ]}
+                    size="small"
+                    bordered={false}
+                    showHeader={true}
+                    pageSize="10"
+                    data-component-id="DataTableWithPage2"
+                />
+            </Tab.Item>
+            <Tab.Item title="教育/传媒/广告">
+                <DataTableWithPage
+                    requestUrl="/api/1.0/dsproxy?dsApiPath=/zhaopin_round2_industry_hot&dsApiMethod=GET&dSaPiId=358915217634018&dsHost=http://c910bcd77a554ebdaeec0895fd0123cc-cn-shanghai.alicloudapi.com&d2projectId=102103"
+                    requestInterval="0"
+                    requestMethod="get"
+                    requestParams={{
+                        pageNum: "1",
+                        pageSize: "10",
+                        cur_industry_id: "教育/传媒/广告"
+                    }}
+                    dataFilter={data => data}
+                    columns={[
+                        { title: "职位类型", dataIndex: "jd_sub_type" },
+                        { title: "标题", dataIndex: "jd_title" },
+                        { title: "薪水", dataIndex: "salary" },
+                        { title: "城市", dataIndex: "city" },
+                        {
+                            title: "工作经验",
+                            dataIndex: "min_years"
+                        },
+                        { title: "学历要求", dataIndex: "min_edu_level" },
+                        {
+                            title: "招聘人数",
+                            dataIndex: "require_nums"
+                        },
+                        {
+                            title: "发布日期",
+                            dataIndex: "start_date"
+                        },
+                        { title: "截止日期", dataIndex: "end_date" },
+                        {
+                            title: "更多",
+                            dataIndex: "jd_no",
+                            render: (jd_no, item, index) => {
+                                return (
+                                    <div>
+                                        <Button
+                                            title="查看详情"
+                                            type="primary"
+                                            onClick={() =>
+                                                window.open(
+                                                    `#/jd_detail/${item.jd_no}`
+                                                )}
+                                        />
+                                    </div>
+                                )
+                            }
+                        }
+                    ]}
+                    size="small"
+                    bordered={false}
+                    showHeader={true}
+                    pageSize="10"
+                    data-component-id="DataTableWithPage2"
+                />
+            </Tab.Item>
+            <Tab.Item title="服务业">
+                <DataTableWithPage
+                    requestUrl="/api/1.0/dsproxy?dsApiPath=/zhaopin_round2_industry_hot&dsApiMethod=GET&dSaPiId=358915217634018&dsHost=http://c910bcd77a554ebdaeec0895fd0123cc-cn-shanghai.alicloudapi.com&d2projectId=102103"
+                    requestInterval="0"
+                    requestMethod="get"
+                    requestParams={{
+                        pageNum: "1",
+                        pageSize: "10",
+                        cur_industry_id: "服务业"
+                    }}
+                    dataFilter={data => data}
+                    columns={[
+                        { title: "职位类型", dataIndex: "jd_sub_type" },
+                        { title: "标题", dataIndex: "jd_title" },
+                        { title: "薪水", dataIndex: "salary" },
+                        { title: "城市", dataIndex: "city" },
+                        {
+                            title: "工作经验",
+                            dataIndex: "min_years"
+                        },
+                        { title: "学历要求", dataIndex: "min_edu_level" },
+                        {
+                            title: "招聘人数",
+                            dataIndex: "require_nums"
+                        },
+                        {
+                            title: "发布日期",
+                            dataIndex: "start_date"
+                        },
+                        { title: "截止日期", dataIndex: "end_date" },
+                        {
+                            title: "更多",
+                            dataIndex: "jd_no",
+                            render: (jd_no, item, index) => {
+                                return (
+                                    <div>
+                                        <Button
+                                            title="查看详情"
+                                            type="primary"
+                                            onClick={() =>
+                                                window.open(
+                                                    `#/jd_detail/${item.jd_no}`
+                                                )}
+                                        />
+                                    </div>
+                                )
+                            }
+                        }
+                    ]}
+                    size="small"
+                    bordered={false}
+                    showHeader={true}
+                    pageSize="10"
+                    data-component-id="DataTableWithPage2"
+                />
+            </Tab.Item>
+            <Tab.Item title="市场/销售">
+                <DataTableWithPage
+                    requestUrl="/api/1.0/dsproxy?dsApiPath=/zhaopin_round2_industry_hot&dsApiMethod=GET&dSaPiId=358915217634018&dsHost=http://c910bcd77a554ebdaeec0895fd0123cc-cn-shanghai.alicloudapi.com&d2projectId=102103"
+                    requestInterval="0"
+                    requestMethod="get"
+                    requestParams={{
+                        pageNum: "1",
+                        pageSize: "10",
+                        cur_industry_id: "市场/销售"
+                    }}
+                    dataFilter={data => data}
+                    columns={[
+                        { title: "职位类型", dataIndex: "jd_sub_type" },
+                        { title: "标题", dataIndex: "jd_title" },
+                        { title: "薪水", dataIndex: "salary" },
+                        { title: "城市", dataIndex: "city" },
+                        {
+                            title: "工作经验",
+                            dataIndex: "min_years"
+                        },
+                        { title: "学历要求", dataIndex: "min_edu_level" },
+                        {
+                            title: "招聘人数",
+                            dataIndex: "require_nums"
+                        },
+                        {
+                            title: "发布日期",
+                            dataIndex: "start_date"
+                        },
+                        { title: "截止日期", dataIndex: "end_date" },
+                        {
+                            title: "更多",
+                            dataIndex: "jd_no",
+                            render: (jd_no, item, index) => {
+                                return (
+                                    <div>
+                                        <Button
+                                            title="查看详情"
+                                            type="primary"
+                                            onClick={() =>
+                                                window.open(
+                                                    `#/jd_detail/${item.jd_no}`
+                                                )}
+                                        />
+                                    </div>
+                                )
+                            }
+                        }
+                    ]}
+                    size="small"
+                    bordered={false}
+                    showHeader={true}
+                    pageSize="10"
+                    data-component-id="DataTableWithPage2"
+                />
+            </Tab.Item>
+            <Tab.Item title="人事/财务/行政">
+                <DataTableWithPage
+                    requestUrl="/api/1.0/dsproxy?dsApiPath=/zhaopin_round2_industry_hot&dsApiMethod=GET&dSaPiId=358915217634018&dsHost=http://c910bcd77a554ebdaeec0895fd0123cc-cn-shanghai.alicloudapi.com&d2projectId=102103"
+                    requestInterval="0"
+                    requestMethod="get"
+                    requestParams={{
+                        pageNum: "1",
+                        pageSize: "10",
+                        cur_industry_id: "人事/财务/行政"
+                    }}
+                    dataFilter={data => data}
+                    columns={[
+                        { title: "职位类型", dataIndex: "jd_sub_type" },
+                        { title: "标题", dataIndex: "jd_title" },
+                        { title: "薪水", dataIndex: "salary" },
+                        { title: "城市", dataIndex: "city" },
+                        {
+                            title: "工作经验",
+                            dataIndex: "min_years"
+                        },
+                        { title: "学历要求", dataIndex: "min_edu_level" },
+                        {
+                            title: "招聘人数",
+                            dataIndex: "require_nums"
+                        },
+                        {
+                            title: "发布日期",
+                            dataIndex: "start_date"
+                        },
+                        { title: "截止日期", dataIndex: "end_date" },
+                        {
+                            title: "更多",
+                            dataIndex: "jd_no",
+                            render: (jd_no, item, index) => {
+                                return (
+                                    <div>
+                                        <Button
+                                            title="查看详情"
+                                            type="primary"
+                                            onClick={() =>
+                                                window.open(
+                                                    `#/jd_detail/${item.jd_no}`
+                                                )}
+                                        />
+                                    </div>
+                                )
+                            }
+                        }
+                    ]}
+                    size="small"
+                    bordered={false}
+                    showHeader={true}
+                    pageSize="10"
+                    data-component-id="DataTableWithPage2"
+                />
+            </Tab.Item>
+        </Tab>
+    </Section>
+</Section>
+<Flex parts="8:8:8" data-component-id="Flex2">
+    <Flex.Item>
+        <Card
+            title="应届生求职"
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="面试中哪个细节会让你错过HR？"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653356548&idx=1&sn=01488b7da81eef2244afc8304d2d4636&chksm=bcec658b8b9bec9dc7ea83368131c3d59bd7488af26f3040b15de2642815faa85ff8d4c4359c&token=1356234768&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+        <Card
+            title=""
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="普通二本毕业，需要哪些努力才能进BAT?"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653356503&idx=1&sn=2e9fd2349cfd8c8401dcd517be2c8233&chksm=bcec66588b9bef4ecf09cb7e7cbd65cea228a0c23003c7fa0482989130a2db7bb263f0cc38c6&token=1356234768&lang=zh_CN"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+        <Card
+            title=""
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="HR问“什么时间可以入职”，这样回答最保险！"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653355997&idx=1&sn=e062e16d84206560f40e903d330ed13b&chksm=bced98528b9a114463132afd2a5ec1abb4401d813aec6c810cb03cb8db510c0a599689455ebc&token=1356234768&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+        <Card
+            title=""
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="HR问“有什么兴趣爱好”，这样回答能加分！"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653355934&idx=1&sn=a01a1935fd3e2491fcfce21f7b09f015&chksm=bced98118b9a110778b03dd3bb1d0e43f84ecd7e9f339f11b4c288a3c6a8ae6dc096d81ca775&token=1356234768&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+    </Flex.Item>
+    <Flex.Item>
+        <Card
+            title="精华文章"
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="996工作制：为什么越来越多好公司不鼓励员工加班了？"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653355803&idx=1&sn=cacfc0914f6bae9cce7d6a4a8fc2dc76&chksm=bced98948b9a11823f7091cc9ac458452119299d69863377ce36bb91ea4feb34043b13ad375d&token=1356234768&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+        <Card
+            title=""
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="《都挺好》暴露的职场规则，比原生家庭好看10000倍"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653356212&idx=1&sn=cdadee19178411af573d3b237ee044e6&chksm=bcec673b8b9bee2d84b3b8545436319c7995dda9459fe54b32184a1c66e74f6e0868b8858f78&token=1356234768&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+        <Card
+            title=""
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="德邦奖励优秀快递员10万金砖：我劝你找一家好好谈钱的公司"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653356249&idx=1&sn=5f5e6e0b136b463c47cef1d696110edd&chksm=bcec67568b9bee40624c223fce1425eeb131176976a09319cfd9ce02a2a46f743b61f27baff0&token=1356234768&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+        <Card
+            title=""
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="上班第二天就不化妆：怎么打扮，才能对职业发展有好处？"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653356260&idx=1&sn=fca084ec820e6d5048e9f6676451f7a7&chksm=bcec676b8b9bee7d8e1c505e7f9e459fda0f5bdae71422d980a176b96b611ff5f6987dffa40e&token=1356234768&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+    </Flex.Item>
+    <Flex.Item>
+        <Card
+            title="职场心得"
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="老板好不好，看员工敢不敢怼他"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653355837&idx=1&sn=464b68e401576376600503e742af8cef&chksm=bced98b28b9a11a4826422215c70f8be0530a61017dfed6f7b7ce5f6ce06e0b17c5db4f43146&token=1082320505&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+        <Card
+            title=""
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="有哪些不起眼但却很赚钱的职业？"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653356572&idx=1&sn=58f92b14e9f35a2fa191036f5369ad88&chksm=bcec65938b9bec85d508abce4ed7ba331c3516f9f964576646ce0440bf2182eee9d4f0737185&token=1356234768&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+        <Card
+            title=""
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="要求老板对自己态度好，有没有道理？"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653356543&idx=1&sn=0af4ccd42bc5c1c5cc0207cc2321ed4f&chksm=bcec66708b9bef66c49eb9a9b405b8a63abc435f69109e52f491e57e33d3c905191d5a3803a4&token=1356234768&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+        <Card
+            title=""
+            showTitleBullet={false}
+            showHeadDivider={true}
+            contentHeight="auto"
+            data-component-id="Card1"
+        >
+            <Link
+                text="你的期望薪资与实际薪资差多少？"
+                linkUrl="https://mp.weixin.qq.com/s?__biz=MjM5OTE1NDQwMA==&mid=2653356563&idx=1&sn=f583d5f7e3804ab2a7cca88615826b50&chksm=bcec659c8b9bec8ab84139caf02598927b110bb381cbac3606ca208638c940374a06d54a5ad9&token=1356234768&lang=zh_CN#rd"
+                target="_blank"
+                data-component-id="Link1"
+            />
+        </Card>
+    </Flex.Item>
+</Flex>
