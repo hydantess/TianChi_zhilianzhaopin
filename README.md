@@ -3,7 +3,7 @@
 
 Link：https://tianchi.aliyun.com/competition/entrance/231728/rankingList
 
-Team Name: azu
+Team Name:  azu
 
 Final Rank：1st
 
